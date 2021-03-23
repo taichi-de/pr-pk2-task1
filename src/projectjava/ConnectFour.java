@@ -1,4 +1,5 @@
-import java.util.Scanner;
+package projectjava;
+  import java.util.Scanner;
 
 public class ConnectFour {
 
@@ -15,7 +16,7 @@ public class ConnectFour {
     }
 
     int turn = 1;
-    char player = 'R';
+    char player = 'X';
     boolean winner = false;
 
     //play a turn
@@ -25,7 +26,7 @@ public class ConnectFour {
       do {
         display(grid);
 
-        System.out.print("Player " + player + ", choose a column: ");
+        System.out.print(">Player " + player + ", choose a column(0-7): ");
         play = in.nextInt();
 
         //validate play
@@ -45,10 +46,10 @@ public class ConnectFour {
       winner = isWinner(player,grid);
 
       //switch players
-      if (player == 'R'){
-        player = 'B';
+      if (player == 'X'){
+        player = 'O';
       }else{
-        player = 'R';
+        player = 'X';
       }
 
       turn++;
@@ -56,30 +57,29 @@ public class ConnectFour {
     display(grid);
 
     if (winner){
-      if (player=='R'){
-        System.out.println("Black won");
+      if (player =='O'){
+        System.out.println("≈≈ Player X won ≈≈");
       }else{
-        System.out.println("Red won");
+        System.out.println("≈≈ Player O won ≈≈");
       }
     }else{
-      System.out.println("Tie game");
+      System.out.println("≈≈ Tie game ≈≈");
     }
 
   }
 
   public static void display(char[][] grid){
-    System.out.println(" 0 1 2 3 4 5 6");
-    System.out.println("---------------");
+    System.out.println("01234567");
+    System.out.println("........");
     for (int row = 0; row < grid.length; row++){
-      System.out.print("|");
+      //System.out.print("");
       for (int col = 0; col < grid[0].length; col++){
         System.out.print(grid[row][col]);
-        System.out.print("|");
       }
       System.out.println();
-      System.out.println("---------------");
+      System.out.println("........");
     }
-    System.out.println(" 0 1 2 3 4 5 6");
+    System.out.println("01234567");
     System.out.println();
   }
 
@@ -123,7 +123,7 @@ public class ConnectFour {
     //check upward diagonal
     for(int row = 3; row < grid.length; row++){
       for(int col = 0; col < grid[0].length - 3; col++){
-        if (grid[row][col] == player   &&
+        if (grid[row][col] == player     &&
             grid[row-1][col+1] == player &&
             grid[row-2][col+2] == player &&
             grid[row-3][col+3] == player){
@@ -134,7 +134,7 @@ public class ConnectFour {
     //check downward diagonal
     for(int row = 0; row < grid.length - 3; row++){
       for(int col = 0; col < grid[0].length - 3; col++){
-        if (grid[row][col] == player   &&
+        if (grid[row][col] == player     &&
             grid[row+1][col+1] == player &&
             grid[row+2][col+2] == player &&
             grid[row+3][col+3] == player){
